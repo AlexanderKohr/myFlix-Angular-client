@@ -4,7 +4,7 @@ import { Observable, throwError, catchError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 // Declaring the api url that will provide data for the cleint app
-const apiUrl = 'https://movieanorak.herokuapp.com';
+const apiUrl = 'https://movieanorak.herokuapp.com/';
 // Get token from localStorage
 const token = localStorage.getItem('token');
 // Get username from localStorage for endpoints
@@ -30,8 +30,8 @@ export class UserRegistrationService {
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http
-    .post(apiUrl + 'login', userDetails).pipe(
-      catchError(this.handleError)
+    .post(apiUrl + 'login', userDetails)
+    .pipe(catchError(this.handleError)
     );
   }
 

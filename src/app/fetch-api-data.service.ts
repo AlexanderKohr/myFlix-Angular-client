@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, catchError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 // Declaring the api url that will provide data for the cleint app
 const apiUrl = 'https://movieanorak.herokuapp.com/';
 // Get token from localStorage
 const token = localStorage.getItem('token');
 // Get username from localStorage for endpoints
-const username = localStorage.getItem('username');
+const username = localStorage.getItem('user');
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +51,7 @@ export class UserRegistrationService {
   getSingleMovie(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-    .get(apiUrl + 'movies/:movieId', {
+    .get(apiUrl + 'movies/:Title', {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
@@ -86,6 +86,7 @@ export class UserRegistrationService {
   // get a users favorite movies
   getFavoriteMovies(): Observable<any> {
     const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
     return this.http
     .get(apiUrl + `users/${username}`, {
       headers: new HttpHeaders({
@@ -96,22 +97,40 @@ export class UserRegistrationService {
   }
 
   // add a movie to favorite movies list
-  addFavoriteMovies(id:string): Observable<any> {
+  /* addFavoriteMovies(MovieID: string, Title: string): Observable<any> {
     const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
     return this.http
-    .post(apiUrl + `users/${username}/movies/${id}`, {
+    .post(apiUrl + `users/${username}/movies/${MovieID}`, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
     })
     .pipe(catchError(this.handleError));
+  } */
+
+  public addFavoriteMovies(MovieID: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+    console.log('MovieID:' + MovieID)
+    // console.log(apiUrl + `users/${username}/movies/${MovieID}`);
+    return this.http
+    .post(apiUrl + `users/${username}/movies/${MovieID}`, null, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    })
+    .pipe(catchError(this.handleError)
+    );
   }
 
   // delete movie from favorite movies list
-  deleteFavoriteMovies(id:string): Observable<any> {
+  public deleteFavoriteMovies(MovieID: string): Observable<any> {
     const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+    console.log('ID: ' + MovieID);
     return this.http
-    .delete(apiUrl + `users/${username}/movies/${id}`, {
+    .delete(apiUrl + `users/${username}/movies/${MovieID}`, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
@@ -122,6 +141,7 @@ export class UserRegistrationService {
   // get users profile information
   getUserProfile(): Observable<any> {
     const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
     return this.http
     .get(apiUrl + `users/${username}`, {
       headers: new HttpHeaders({

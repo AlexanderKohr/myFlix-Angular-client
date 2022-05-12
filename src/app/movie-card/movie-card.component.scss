@@ -1,0 +1,47 @@
+$backgroundColor: #E9F6FF;
+$cardColor: #66C3FF;
+$textColor: #003D66;
+$boxShadowColor: #006BB3;
+
+img {
+    border-radius: 5px;
+}
+
+.movie-card {
+    background-color: $backgroundColor;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    justify-items: stretch;
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+.movie-title {
+    text-align: center;
+    color: $textColor;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+.img-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 400px;
+}
+.mat-card {
+    margin: 1rem;
+    display: grid;    
+    background-color: $cardColor;
+    overflow: hidden;
+    width: 300px;
+    height: 530px;
+    box-shadow: 10px 5px 5px $boxShadowColor;
+}
+.mat-card-header{
+    margin-top: 5px;
+    display: inline-block;
+    background-color: $cardColor;
+    text-align: center;
+    color: $textColor;
+}

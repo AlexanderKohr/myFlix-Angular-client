@@ -1,0 +1,11 @@
+$backgroundColor: #E9F6FF;
+$cardColor: #66C3FF;
+$textColor: #003D66;
+$boxShadowColor: #006BB3;
+
+.nav-bar {
+    position: fixed;
+    background-color: $cardColor;
+    z-index: 1;
+    width: 100%;
+}

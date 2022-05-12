@@ -1,0 +1,41 @@
+$backgroundColor: #E9F6FF;
+$cardColor: #66C3FF;
+$textColor: #003D66;
+$boxShadowColor: #006BB3;
+
+.user-info{
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.profile-background {
+    background-color: $backgroundColor;
+    width: 100%;
+    height: 100%;
+    padding-top: 4rem;
+}
+
+.profile-card {
+    margin: auto;
+    margin-bottom: 100px;
+    width: 50%;
+    box-shadow: none;
+    background-color: $cardColor;
+    box-shadow: 10px 5px 5px $boxShadowColor;
+}
+
+button {
+    float: right;
+    margin-right: 5px;
+}
+
+.movie-card {
+    padding-top: 500px;
+    margin: auto;
+    width: 50%;
+    box-shadow: none;
+    background-color: $cardColor;
+    box-shadow: 10px 5px 5px $boxShadowColor;
+}

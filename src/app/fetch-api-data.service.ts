@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 // Declaring the api url that will provide data for the cleint app
 const apiUrl = 'https://movieanorak.herokuapp.com/';
@@ -44,7 +45,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // get a singe movie's detail
@@ -56,7 +57,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // get a singe movie's director detail
@@ -68,7 +69,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // get a singe movie's genre detail
@@ -80,7 +81,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // get a users favorite movies
@@ -93,7 +94,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // add a movie to favorite movies list
@@ -120,8 +121,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError)
-    );
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // delete movie from favorite movies list
@@ -135,7 +135,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // get users profile information
@@ -160,7 +160,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // delete a user's profile
@@ -172,7 +172,13 @@ export class UserRegistrationService {
         Authorization: 'Bearer ' + token,
       }),
     })
-    .pipe(catchError(this.handleError));
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+
+  // Non-typed response extraction
+  private extractResponseData(res: any): any {
+    const body = res;
+    return body || {};
   }
 
   // function that handles errors

@@ -43,8 +43,9 @@ export class UserEditComponent implements OnInit {
     this.fetchApiData.editUserProfile(this.userData).subscribe((resp) => {
       this.dialogRef.close();
       localStorage.setItem('user', resp.Username);
-      this.snackBar.open('Your profile was updated successfully.', 'OK', {
-        duration: 2000
+      this.snackBar.open('Your profile has been updated successfully.', 'OK', {
+        duration: 2000,
+        verticalPosition: 'top'
       });
       setTimeout(() => {
         window.location.reload();

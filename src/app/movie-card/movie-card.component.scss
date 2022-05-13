@@ -2,46 +2,79 @@ $backgroundColor: #E9F6FF;
 $cardColor: #66C3FF;
 $textColor: #003D66;
 $boxShadowColor: #006BB3;
+$buttonColor: #001F33;
 
-img {
-    border-radius: 5px;
-}
-
-.movie-card {
-    background-color: $backgroundColor;
+.movie-view {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
-    justify-items: stretch;
-    padding-top: 4rem;
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: $backgroundColor;
 }
-.movie-title {
-    text-align: center;
+
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 10px 5px 5px $boxShadowColor;
+    background-color: $cardColor;
+    max-width: 280px;
+    width: 280px;
+    margin: 15px;
+    padding: 20px 3px;
+}
+
+.mat-card-header {
+    height: 80px;
+    display: flex;
+    align-items: center;
     color: $textColor;
-    margin-top: 5px;
-    margin-bottom: 15px;
 }
-.img-container{
-    width: 100%;
+
+.movies-title {
+    display: flex;
+    max-width: 210px;
+    justify-content: center;
+    text-align: center;
+    line-height: normal;
+}
+
+.mat-card-subtitle {
+    font-size: 12px;
     display: flex;
     justify-content: center;
-    height: 400px;
-}
-.mat-card {
-    margin: 1rem;
-    display: grid;    
-    background-color: $cardColor;
-    overflow: hidden;
-    width: 300px;
-    height: 530px;
-    box-shadow: 10px 5px 5px $boxShadowColor;
-}
-.mat-card-header{
-    margin-top: 5px;
-    display: inline-block;
-    background-color: $cardColor;
     text-align: center;
     color: $textColor;
+}
+
+.director-button {
+    padding: 5px;
+    margin: 0;
+    line-height: 0;
+    max-height: 20px;
+}
+
+img {
+    width: 250px;
+    height: 350px;
+    object-fit: contain;
+}
+
+.mat-icon-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.genre-button {
+    background-color: $buttonColor;
+    color: $backgroundColor;
+}
+
+.synopsis-button {
+    background-color: $buttonColor;
+    color: $backgroundColor;
 }

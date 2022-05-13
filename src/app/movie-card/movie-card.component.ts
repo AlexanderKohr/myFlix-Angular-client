@@ -12,12 +12,13 @@ import { SynopsisCardComponent } from '../synopsis-card/synopsis-card.component'
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   user: any = {};
   Username = localStorage.getItem('user');
   movies: any[] = [];
   currentUser: any = null;
   currentFavs: any = null;
+
   constructor(
     public fetchApiData: UserRegistrationService, 
     public dialog: MatDialog, 
@@ -35,7 +36,7 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      //console.log(this.movies);
       return this.movies;
     });
   }
@@ -82,31 +83,41 @@ export class MovieCardComponent {
   // Gets the current user
   getCurrentUser(): void {
     const username = localStorage.getItem('user');
-    this.fetchApiData.getUserProfile().subscribe((resp: any) => {
-      console.log(resp)
-      const currentUser = resp.Username
+    this.fetchApiData.getUserProfile().subscribe((res: any) => {
+      console.log(res)
+      const currentUser = res.Username
       console.log(currentUser)
-      const currentFavs = resp.FavoriteMovies
+      const currentFavs = res.FavoriteMovies
       console.log(currentFavs)
     });
   }
 
   // Adds movie to users favorites
-  addToUserFavs(id: string): void {
+  addToUserFavs(id: string, Title: string): void {
     console.log(id);
     const token = localStorage.getItem('token');
     console.log(token)
-    this.fetchApiData.addFavoriteMovies(id).subscribe((resp: any) => {
-      console.log(resp)
+    this.fetchApiData.addFavoriteMovies(id).subscribe((res: any) => {
+      this.snackBar.open(`Successfully added ${Title} to favorite movies.`, 'OK', {
+        duration: 4000,
+        verticalPosition: 'top'
+      });
+      console.log(res)
       this.ngOnInit();
     });
   }
 
   // Deletes a movie from users favorite movies
-  deleteFavoriteMovies(MovieID: string): void {
-    console.log(MovieID)
-    this.fetchApiData.deleteFavoriteMovies(MovieID).subscribe((resp: any) => {
-      console.log(resp)
+  deleteFavoriteMovies(id: string, Title: string): void {
+    console.log(id)
+    this.fetchApiData.deleteFavoriteMovies(id).subscribe((res: any) => {
+      this.snackBar.open(`${Title} has been removed from favorites`, 'OK', {
+        duration: 2000,
+        verticalPosition: 'top'
+      });
+      this.ngOnInit();
+      console.log(res)
     });
+    return this.getCurrentUser();
   }
 }

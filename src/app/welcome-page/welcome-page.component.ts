@@ -17,7 +17,8 @@ export class WelcomePageComponent implements OnInit {
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       // Assigning the dialog a width
-      width: '480px'
+      width: '480px',
+      panelClass: 'register-custom'
     });
   }
 
@@ -26,7 +27,8 @@ export class WelcomePageComponent implements OnInit {
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       // Assiging the dialog a width
-      width: '480px'
+      width: '480px',
+      panelClass: 'login-custom'
     });
   }
 }

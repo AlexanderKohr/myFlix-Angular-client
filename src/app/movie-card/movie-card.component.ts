@@ -32,7 +32,10 @@ export class MovieCardComponent implements OnInit {
     this.getCurrentUser();
   }
 
-  // Gets all movies
+  /**
+   * uses API end-point to get a list of all movies in json format
+   * @function getAllMovies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -41,7 +44,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Opens the director view
+  /**
+   * opens the dialog to display the information from DirectorCardComponent
+   * @param name {string}
+   * @param bio {string}
+   * @param birth {string}
+   */
   openDirectorDialog(name: string, bio: string, birth: string): void {
     this.dialog.open(DirectorCardComponent, {
       data: {
@@ -55,7 +63,11 @@ export class MovieCardComponent implements OnInit {
     console.log(name)
   }
 
-  // Opens the Genre view
+  /**
+   * opens the dialog to display the information from GenreCardComponent
+   * @param name {string}
+   * @param description {string}
+   */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreCardComponent, {
       data: {
@@ -67,7 +79,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Opens the synopsis view
+  /**
+   * opens the dialog to display the information from SynopsisCardComponent
+   * @param title {string}
+   * @param imagePath {any}
+   * @param description {string}
+   */
   openSynopsis(title: string, imagePath: any, description: string): void {
     this.dialog.open(SynopsisCardComponent, {
       data: {
@@ -80,7 +97,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Gets the current user
+  /**
+   * gets the current logged in user's data
+   * @function getUserProfile
+   * @returns the current logged in user's data
+   */
   getCurrentUser(): void {
     const username = localStorage.getItem('user');
     this.fetchApiData.getUserProfile().subscribe((res: any) => {
@@ -92,7 +113,13 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Adds movie to users favorites
+  /**
+   * use API end-point to add a movie to user's favorites
+   * @function addFavoriteMovies
+   * @param id {string}
+   * @param Title {string}
+   * @returns an array of the movie object in json format
+   */
   addToUserFavs(id: string, Title: string): void {
     console.log(id);
     const token = localStorage.getItem('token');
@@ -107,7 +134,13 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Deletes a movie from users favorite movies
+  /**
+   * user API end-point to remove a movie from user's favorites
+   * @function deleteFavoriteMovies
+   * @param id {string}
+   * @param Title {string}
+   * @returns updated user's data in json format
+   */
   deleteFavoriteMovies(id: string, Title: string): void {
     console.log(id)
     this.fetchApiData.deleteFavoriteMovies(id).subscribe((res: any) => {

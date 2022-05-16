@@ -33,6 +33,11 @@ export class ProfileViewComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
+  /**
+   * calls API end-piont to get the user's data
+   * @function getUserProfile
+   * @returns user's data in json format
+   */
   getUserProfile(): void {
     const username = localStorage.getItem('user');
     if (username) {
@@ -44,6 +49,9 @@ export class ProfileViewComponent implements OnInit {
     }
   }
 
+  /**
+   * opens the UserEditComponent for a user to change their personal data
+   */
   openEditUserProfile(): void {
     this.dialog.open(UserEditComponent, {
       width: '500px',
@@ -51,13 +59,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
-  /*getFavoriteMovies(): void {
-    this.fetchApiData.getFavoriteMovies().subscribe((res: any) => {
-      this.favoriteMovies = res.FavoriteMovies;
-      return this.favoriteMovies;
-    });
-  }*/
-
+  /**
+   * gets a user's FavoriteMovies
+   * @function getAllMovies
+   */
   getFavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -70,6 +75,12 @@ export class ProfileViewComponent implements OnInit {
     console.log(this.favoriteMovies);
   }
 
+  /**
+   * opens the dialog to display the SynopsisCarsComponent
+   * @param title {string}
+   * @param imagePath {any}
+   * @param description {string}
+   */
   openSynopsis(title: string, imagePath: any, description: string): void {
     this.dialog.open(SynopsisCardComponent, {
       data: {
@@ -82,6 +93,13 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * opens the dialog to display the DirectorCardComponent
+   * @param title {string}
+   * @param name {string}
+   * @param bio {string}
+   * @param birth {string}
+   */
   openDirectorDialog(title: string, name: string, bio: string, birth: string): void {
     this.dialog.open(DirectorCardComponent, {
       data: {
@@ -95,6 +113,12 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * opens the dialog to display the GenreCardComponent
+   * @param title {string}
+   * @param name {string}
+   * @param description {string}
+   */
   openGenreDialog(title: string, name: string, description: string): void {
     this.dialog.open(GenreCardComponent, {
       data: {
@@ -108,21 +132,11 @@ export class ProfileViewComponent implements OnInit {
     console.log('Name: ' + name)
   }
 
-  // Gets favorite movies
-  /* getFavs(): void {
-    this.fetchApiData.getAllMovies().subscribe((res: any) => {
-      this.movies = res;
-      this.movies.forEach((movie: any) => {
-        if (this.user.FavoriteMovies.include(movie._id)) {
-          this.favMovies.push(movie);
-          this.displayElement = true;
-        }
-      });
-    });
-    console.log(this.favMovies);
-  } */
-
-  // Deletes a users account
+  /**
+   * calls API end-point to remove a current logged in user from database
+   * @function deleteUserProfile
+   * @returns status for user has been removed
+   */
   deleteUserProfile(): void {
     if (confirm('Are your sure you want to delete your account? This can\'t be undone.')) {
       this.router.navigate(['welcome']).then(() => {
@@ -138,6 +152,13 @@ export class ProfileViewComponent implements OnInit {
     }
   }
 
+  /**
+   * use API end-point to remove a movie from user's favorites
+   * @function deleteFavoriteMovies
+   * @param MovieID {string}
+   * @param Title {string}
+   * @returns updated user's data in json format
+   */
   deleteFavoriteMovies(MovieID: string, Title: string): void {
     this.fetchApiData.deleteFavoriteMovies(MovieID).subscribe((res: any) => {
       this.snackBar.open(`Successfully removed ${Title} from favorite movies.`, 'OK', {

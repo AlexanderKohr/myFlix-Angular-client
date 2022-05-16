@@ -10,9 +10,10 @@ export class SynopsisCardComponent implements OnInit {
 
   constructor(
 
-    /*
+    /**
      * Uses Inject to get the movie details from the movie object
-    */
+     * @param data
+     */
    @Inject(MAT_DIALOG_DATA)
    public data: {
      Title: string,
